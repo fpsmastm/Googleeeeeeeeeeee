@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notification Spammer (Demo)</title>
+  <meta charset="UTF-8">
+</head>
+<body style="font-family:sans-serif;text-align:center;margin-top:50px;">
+
+<h1>⚠ Notification Spammer (Demo)</h1>
+<p>
+This site sends multiple notifications.<br>
+<b>This is only a demo.</b><br><br>
+Are you sure you want to continue?
+</p>
+
+<button onclick="startDemo()" style="font-size:18px;padding:10px 20px;">
+Yes, I Understand
+</button>
+
+<p id="status"></p>
+
+<script>
+async function startDemo() {
+  if (!("Notification" in window)) {
+    alert("Notifications not supported.");
+    return;
+  }
+
+  const permission = await Notification.requestPermission();
+
+  if (permission !== "granted") {
+    document.getElementById("status").innerText =
+      "Permission denied.";
+    return;
+  }
+
+  document.getElementById("status").innerText =
+    "Permission granted. Sending demo notifications…";
+
+  let count = 0;
+  const max = 5;
+
+  const interval = setInterval(() => {
+    count++;
+    new Notification("Notification Spammer (Demo)", {
+      body: "Demo notification " + count + " of " + max
+    });
+
+    if (count >= max) clearInterval(interval);
+  }, 2000);
+}
+</script>
+
+</body>
+</html>
