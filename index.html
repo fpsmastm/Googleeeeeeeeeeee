@@ -38,7 +38,7 @@ async function startDemo() {
     "Permission granted. Sending demo notifications…";
 
   let count = 0;
-  const max = 5;
+  const max = 40;
 
   const interval = setInterval(() => {
     count++;
@@ -47,7 +47,7 @@ async function startDemo() {
     });
 
     if (count >= max) clearInterval(interval);
-  }, 2000);
+  }, 5000);
 }
 </script>
 
